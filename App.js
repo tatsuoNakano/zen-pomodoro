@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
 
 const PomodoroApp = () => {
-  const [minutes, setMinutes] = useState(1);
+  const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isWorkTime, setIsWorkTime] = useState(true); // 新しいステート
@@ -58,7 +58,7 @@ const PomodoroApp = () => {
 
   const resetTimer = () => {
     setIsActive(false);
-    setMinutes(1);
+    setMinutes(25);
     setSeconds(0);
     setIsWorkTime(true); // リセット時に作業時間に設定
   };
