@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
+
 const PomodoroApp = () => {
   const [minutes, setMinutes] = useState(1);
-  // 開発用に1分と設定してある
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [isWorkTime, setIsWorkTime] = useState(true); // 新しいステート
 
   const [toggle1, setToggle1] = useState(false);
   const [toggle2, setToggle2] = useState(false);
@@ -19,13 +20,24 @@ const PomodoroApp = () => {
         if (seconds === 0) {
           if (minutes === 0) {
             clearInterval(interval);
-            setMinutes(5);
-            setSeconds(0);
             setIsActive(false);
-            Alert.alert(
-                "25 minutes of focus time has ended",
-                "Please take a break for 5 minutes"
-            );
+            if (isWorkTime) { // 作業時間終了後に休憩時間を設定
+              setMinutes(2);
+              setSeconds(0);
+              setIsWorkTime(false); // 休憩時間に切り替え
+              Alert.alert(
+                  "25 minutes of focus time has ended",
+                  "Please take a break for 5 minutes"
+              );
+            } else { // 休憩時間終了後に新たに25分の作業時間を設定
+              setMinutes(25);
+              setSeconds(0);
+              setIsWorkTime(true); // 作業時間に切り替え
+              Alert.alert(
+                  "Congratulations",
+                  "one set of 25-minute focus time and 5-minute break has completed."
+              );
+            }
           } else {
             setMinutes((prev) => prev - 1);
             setSeconds(59);
@@ -38,7 +50,7 @@ const PomodoroApp = () => {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, minutes, seconds]);
+  }, [isActive, minutes, seconds, isWorkTime]); // isWorkTimeを依存性リストに追加
 
   const toggle = () => {
     setIsActive(!isActive);
@@ -47,10 +59,9 @@ const PomodoroApp = () => {
   const resetTimer = () => {
     setIsActive(false);
     setMinutes(1);
-    // 開発用に1分と設定してある
     setSeconds(0);
+    setIsWorkTime(true); // リセット時に作業時間に設定
   };
-
   return (
       <ImageBackground style={styles.container} source={require('./2553504.jpg')} resizeMode="cover">
         <Text style={styles.text}>
