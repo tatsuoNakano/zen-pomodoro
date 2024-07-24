@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
-import { Link } from 'expo-router';
 
 
 const PomodoroApp = () => {
@@ -9,11 +8,6 @@ const PomodoroApp = () => {
     const [isActive, setIsActive] = useState(false);
     const [isWorkTime, setIsWorkTime] = useState(true); // 新しいステート
 
-    const [toggle1, setToggle1] = useState(false);
-    const [toggle2, setToggle2] = useState(false);
-    const [toggle3, setToggle3] = useState(false);
-    const [toggle4, setToggle4] = useState(false);
-    const [toggle5, setToggle5] = useState(false);
 
     useEffect(() => {
         let interval;
@@ -77,14 +71,6 @@ const PomodoroApp = () => {
                     <Text style={styles.buttonText}>Reset</Text>
                 </TouchableOpacity>
             </View>
-            <View style={styles.toggleContainer}>
-                <TouchableOpacity style={toggle1 ? styles.toggleButtonActive : styles.toggleButton} onPress={() => setToggle1(!toggle1)} />
-                <TouchableOpacity style={toggle2 ? styles.toggleButtonActive : styles.toggleButton} onPress={() => setToggle2(!toggle2)} />
-                <TouchableOpacity style={toggle3 ? styles.toggleButtonActive : styles.toggleButton} onPress={() => setToggle3(!toggle3)} />
-                <TouchableOpacity style={toggle4 ? styles.toggleButtonActive : styles.toggleButton} onPress={() => setToggle4(!toggle4)} />
-                <TouchableOpacity style={toggle5 ? styles.toggleButtonActive : styles.toggleButton} onPress={() => setToggle5(!toggle5)} />
-            </View>
-            <Link href="/graph">About</Link>
 
         </ImageBackground>
     );
@@ -104,7 +90,8 @@ const styles = StyleSheet.create({
     },
     buttonsContainer: {
         flexDirection: 'row',
-        marginTop: 20
+        marginTop: 20,
+        marginBottom: 40,
     },
     button: {
         backgroundColor: '#1E90FF',
@@ -115,26 +102,9 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: 'white',
-        fontSize: 18
+        fontSize: 25
     },
-    toggleContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        width: '100%',
-        paddingBottom: '10%'
-    },
-    toggleButton: {
-        backgroundColor: '#808080',
-        width: 50,
-        height: 50,
-        borderRadius: 25
-    },
-    toggleButtonActive: {
-        backgroundColor: '#1e90ff',
-        width: 50,
-        height: 50,
-        borderRadius: 25
-    }
+
 });
 
 export default PomodoroApp;
