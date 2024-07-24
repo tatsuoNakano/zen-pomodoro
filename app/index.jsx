@@ -59,7 +59,7 @@ const PomodoroApp = () => {
         setIsWorkTime(true); // リセット時に作業時間に設定
     };
     return (
-        <ImageBackground style={styles.container} source={require('../2553504.jpg')} resizeMode="cover">
+        <ImageBackground style={styles.container} source={require('../assets/image/1405951.jpg')} resizeMode="cover">
             <Text style={styles.text}>
                 {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
             </Text>
