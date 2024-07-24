@@ -22,7 +22,7 @@ const PomodoroApp = () => {
             clearInterval(interval);
             setIsActive(false);
             if (isWorkTime) { // 作業時間終了後に休憩時間を設定
-              setMinutes(2);
+              setMinutes(5);
               setSeconds(0);
               setIsWorkTime(false); // 休憩時間に切り替え
               Alert.alert(
