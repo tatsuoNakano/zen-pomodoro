@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
-
+import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
 const PomodoroApp = () => {
-  const [minutes, setMinutes] = useState(25);
+  const [minutes, setMinutes] = useState(1);
+  // 開発用に1分と設定してある
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
@@ -14,7 +14,6 @@ const PomodoroApp = () => {
 
   useEffect(() => {
     let interval;
-
     if (isActive) {
       interval = setInterval(() => {
         if (seconds === 0) {
@@ -23,6 +22,10 @@ const PomodoroApp = () => {
             setMinutes(5);
             setSeconds(0);
             setIsActive(false);
+            Alert.alert(
+                "25 minutes of focus time has ended",
+                "Please take a break for 5 minutes"
+            );
           } else {
             setMinutes((prev) => prev - 1);
             setSeconds(59);
@@ -34,7 +37,6 @@ const PomodoroApp = () => {
     } else {
       clearInterval(interval);
     }
-
     return () => clearInterval(interval);
   }, [isActive, minutes, seconds]);
 
@@ -44,7 +46,8 @@ const PomodoroApp = () => {
 
   const resetTimer = () => {
     setIsActive(false);
-    setMinutes(25);
+    setMinutes(1);
+    // 開発用に1分と設定してある
     setSeconds(0);
   };
 
