@@ -23,21 +23,22 @@ export default function Layout() {
                     ),
                 }}
             />
-            <Tabs.Screen
-                name="information"
-                options={{
-                    title: 'Information',
-                    tabBarIcon: ({ color, size }) => (
-                        <FontAwesome name="info" size={24} color="black" />
-                    ),
-                }}
-            />
+
             <Tabs.Screen
                 name="setting"
                 options={{
                     title: 'Setting',
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome name="gear" size={24} color="black" />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="information"
+                options={{
+                    title: 'Information',
+                    tabBarIcon: ({ color, size }) => (
+                        <FontAwesome name="info" size={24} color="black" />
                     ),
                 }}
             />
