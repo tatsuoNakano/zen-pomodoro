@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
-
+import { Audio } from 'expo-av';
 
 const PomodoroApp = () => {
     const [minutes, setMinutes] = useState(25);
     const [seconds, setSeconds] = useState(0);
     const [isActive, setIsActive] = useState(false);
     const [isWorkTime, setIsWorkTime] = useState(true); // 新しいステート
+    const sound = new Audio.Sound();
 
 
     useEffect(() => {
+
+        const playSound = async () => {
+            try {
+                await sound.unloadAsync(); // let's unload any existing sound first
+                await sound.loadAsync(require('../assets/sound/alert/6.mp3'));
+                await sound.playAsync();
+            } catch (error) {
+                console.log(error);  //add this line to log the error
+            }
+        }
+
         let interval;
         if (isActive) {
             interval = setInterval(() => {
@@ -21,6 +33,7 @@ const PomodoroApp = () => {
                             setMinutes(5);
                             setSeconds(0);
                             setIsWorkTime(false); // 休憩時間に切り替え
+                            playSound()
                             Alert.alert(
                                 "25 minutes of focus time has ended",
                                 "Please take a break for 5 minutes"
@@ -29,6 +42,7 @@ const PomodoroApp = () => {
                             setMinutes(25);
                             setSeconds(0);
                             setIsWorkTime(true); // 作業時間に切り替え
+                            playSound()
                             Alert.alert(
                                 "Congratulations",
                                 "one set of 25-minute focus time and 5-minute break has completed."
