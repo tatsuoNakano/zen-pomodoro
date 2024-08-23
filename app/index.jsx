@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
 import { Audio } from 'expo-av';
 
+
 const PomodoroApp = () => {
     const [minutes, setMinutes] = useState(25);
     const [seconds, setSeconds] = useState(0);
     const [isActive, setIsActive] = useState(false);
     const [isWorkTime, setIsWorkTime] = useState(true); // 新しいステート
     const sound = new Audio.Sound();
-
 
     useEffect(() => {
 
@@ -44,7 +44,7 @@ const PomodoroApp = () => {
                             setIsWorkTime(true); // 作業時間に切り替え
                             playSound()
                             Alert.alert(
-                                "Congratulations",
+                                "Congratulations🎉🎉",
                                 "one set of 25-minute focus time and 5-minute break has completed."
                             );
                         }
