@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
 import { Audio } from 'expo-av';
-
+import { PaperProvider,Button } from 'react-native-paper';
 
 const PomodoroApp = () => {
     const [minutes, setMinutes] = useState(25);
@@ -73,20 +73,21 @@ const PomodoroApp = () => {
         setIsWorkTime(true); // リセット時に作業時間に設定
     };
     return (
-        <ImageBackground style={styles.container} source={require('../assets/image/1405951.jpg')} resizeMode="cover">
-            <Text style={styles.text}>
-                {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
-            </Text>
-            <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={styles.button} onPress={toggle}>
-                    <Text style={styles.buttonText}>{isActive ? "Pause" : "Start"}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={resetTimer}>
-                    <Text style={styles.buttonText}>Reset</Text>
-                </TouchableOpacity>
-            </View>
-
-        </ImageBackground>
+        <PaperProvider>
+            <ImageBackground style={styles.container} source={require('../assets/image/1405951.jpg')} resizeMode="cover">
+                <Text style={styles.text}>
+                    {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+                </Text>
+                <View style={styles.buttonsContainer}>
+                    <TouchableOpacity style={styles.button} onPress={toggle}>
+                        <Text style={styles.buttonText}>{isActive ? "Pause" : "Start"}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={resetTimer}>
+                        <Text style={styles.buttonText}>Reset</Text>
+                    </TouchableOpacity>
+                </View>
+            </ImageBackground>
+        </PaperProvider>
     );
 };
 
