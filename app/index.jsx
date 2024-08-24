@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Alert } from
 import { Audio } from 'expo-av';
 import { PaperProvider,Button } from 'react-native-paper';
 
+
 const PomodoroApp = () => {
     const [minutes, setMinutes] = useState(25);
     const [seconds, setSeconds] = useState(0);
