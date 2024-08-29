@@ -1,7 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Alert,Platform, } from 'react-native';
 import { Audio } from 'expo-av';
 import { PaperProvider,Button } from 'react-native-paper';
+import * as SQLite from "expo-sqlite";
+import Constants from "expo-constants";
+
+// データベース作成
+function openDatabase() {
+    if (Platform.OS === "web") {
+        return {
+            transaction: () => {
+                return {
+                    executeSql: () => {},
+                };
+            },
+        };
+    }
+
+    const db = SQLite.openDatabaseSync("db.db");
+    db.withTransactionSync(() => {
+        db.runSync(
+            `create table if not exists items (timestamp TEXT, totalCount INTEGER);`
+        );
+    });
+    return db;
+}
+
+const db = openDatabase();
+// データベース関連のコード
+
 
 
 const PomodoroApp = () => {
@@ -10,6 +37,9 @@ const PomodoroApp = () => {
     const [isActive, setIsActive] = useState(false);
     const [isWorkTime, setIsWorkTime] = useState(true); // 新しいステート
     const sound = new Audio.Sound();
+
+
+
 
     useEffect(() => {
 
