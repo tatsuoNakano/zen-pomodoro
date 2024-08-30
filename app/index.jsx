@@ -17,17 +17,22 @@ function openDatabase() {
         };
     }
 
-    const db = SQLite.openDatabaseSync("db.db");
+    const db = SQLite.openDatabaseSync("Dailytask.db");
+    console.log("Dailytask 'Dailytask.db' has been created/opened"); // This log gets printed after the db is created or opened
+
     db.withTransactionSync(() => {
         db.runSync(
-            `create table if not exists items (timestamp TEXT, totalCount INTEGER);`
+            `create table if not exists Dailytask (timestamp TEXT, totalCount INTEGER);`
         );
+        console.log("'Dailytask' table has been created if it did not exist"); // This log gets printed after the table is created if it did not exist
     });
+
     return db;
 }
 
 const db = openDatabase();
 // データベース関連のコード
+
 
 
 
@@ -73,6 +78,21 @@ const PomodoroApp = () => {
                             setMinutes(25);
                             setSeconds(0);
                             setIsWorkTime(true); // 作業時間に切り替え
+                            // データベース
+                            const date = new Date();
+                            const currentDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+
+                            try {
+                                db.execAsync(`
+                            UPDATE Dailytask
+                            SET timestamp = ?, totalCount = totalCount + 1
+                            `, currentDate);
+
+                                console.log(`Database successfully updated.`);
+                            } catch (error) {
+                                console.log('There was an error updating the database:', error);
+                            }
+                            // データベース
                             playSound()
                             Alert.alert(
                                 "Congratulations🎉🎉",
@@ -117,6 +137,7 @@ const PomodoroApp = () => {
                         <Text style={styles.buttonText}>Reset</Text>
                     </TouchableOpacity>
                 </View>
+
             </ImageBackground>
         </PaperProvider>
     );
