@@ -4,3 +4,5 @@
 [Expo AVで音を鳴らしますよ！](https://zenn.dev/gemcook/articles/ab959ebe7b5500)
 [React native ui ライブラリのリファレンスページ](https://callstack.github.io/react-native-paper/)
 [expo-sqlite](https://docs.expo.dev/versions/latest/sdk/sqlite/)
+[Expo-SQLite の詳細](https://stackademic.com/blog/expo-sqlite-in-detail)
+[【ReactNative】SQLiteでデータを処理する方法〜アプリ実装済み〜](https://www.jacepark.com/how-to-process-data-with-sqlite/)
