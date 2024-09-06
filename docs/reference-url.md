@@ -6,3 +6,4 @@
 [expo-sqlite](https://docs.expo.dev/versions/latest/sdk/sqlite/)
 [Expo-SQLite の詳細](https://stackademic.com/blog/expo-sqlite-in-detail)
 [【ReactNative】SQLiteでデータを処理する方法〜アプリ実装済み〜](https://www.jacepark.com/how-to-process-data-with-sqlite/)
+[React Native と Expo で SQLite を使用する](https://reactdevstation.github.io/2020/04/04/sqllite.html)
